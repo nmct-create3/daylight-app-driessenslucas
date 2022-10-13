@@ -20,6 +20,7 @@
 
 :root {
 	--global-font: 'Work Sans', sans-serif;
+	--global-font-family: 'Work Sans', sans-serif;
 	/* colors */
 	--global-color-night: #0f3557;
 	--global-color-day: #cce7ff;
@@ -33,6 +34,8 @@
 
 	--global-text-color: var(--global-color-night);
 	--global-background-color: var(--global-color-day);
+
+	--global-sun-color: var(--global-color-night);
 }
 
 /*------------------------------------*\
@@ -55,6 +58,12 @@ html {
 	box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+.is-night {
+	--global-background-color: var(--global-color-night);
+	--global-text-color: var(--global-color-day);
+	--global-sun-color: var(--global-color-day);
 }
 
 *,
@@ -286,7 +295,7 @@ input::placeholder {
 	padding-right: 8px;
 }
 .c-logo--icon__path {
-	fill: var(--global-text-color);
+	fill: var(--global-sun-color);
 }
 
 /*
@@ -302,7 +311,7 @@ input::placeholder {
 	padding-right: 8px;
 }
 .c-sun__path {
-	fill: var(--global-text-color);
+	fill: var(--global-sun-color);
 }
 
 .c-logo .c-sun {
@@ -318,19 +327,20 @@ input::placeholder {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
-	justify-content: center;
+	justify-content: flex-end;
 	margin: 0 auto;
 	width: 400px;
 	height: 100%;
 }
 
 .c-app__summary {
-	font-size: 28px;
+	font-size: 28px !important;
 	font: var(--global-font-family);
 }
 
 .c-app__location {
 	font-size: 16px;
+
 	font: var(--global-font-family);
 }
 
@@ -339,6 +349,9 @@ input::placeholder {
     ---
     Horizon with sun visualisation
 */
+.c-horizon {
+	justify-self: baseline;
+}
 
 .c-horizon__line {
 	border-top: 1px solid var(--global-text-color);
