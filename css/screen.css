@@ -278,10 +278,6 @@ input::placeholder {
 	color: var(--global-text-color);
 }
 .c-logo--icon {
-	height: 22px;
-	width: 22px;
-	align-self: center;
-	padding-right: 7px;
 }
 
 /*
@@ -291,6 +287,13 @@ input::placeholder {
 */
 
 .c-sun {
+	height: 22px;
+	width: 22px;
+	align-self: center;
+	padding-right: 8px;
+}
+.c-sun__path {
+	fill: var(--global-text-color);
 }
 
 .c-logo .c-sun {
@@ -336,6 +339,13 @@ input::placeholder {
     Utilities: Mute
     Mute with opacity
 */
+
+.u-muted {
+	opacity: 0.6;
+}
+.u-unmuted {
+	opacity: 1;
+}
 
 /*------------------------------------*\
 #STATES
