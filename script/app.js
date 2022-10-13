@@ -16,7 +16,6 @@ function _parseMillisecondsIntoReadableTime(timestamp) {
 // 5 TODO: maak updateSun functie
 let updateSun = (percentage) => {
 	const sun = document.querySelector('.js-sun');
-	console.log(percentage);
 
 	sun.style.left = `calc(${percentage}%)`;
 	const bottomPercent =
@@ -48,12 +47,12 @@ let placeSunAndStartMoving = (totalMinutes, sunrise) => {
 
 	//updatesun every minute
 	setInterval(() => {
-		if (minutesSunUp < 0 || minutesSunUp > totalMinutes) {
-			const minutesSunUp = Date.now() - sunrise * 1000;
-			const suntimePast = minutesSunUp / 60 / totalMinutes;
-			updateSun((suntimePast / totalMinutes) * 100);
-		}
-	}, 60000);
+		const minutesSunUp = Date.now() - sunrise * 1000;
+		const suntimePast = minutesSunUp / 60 / totalMinutes;
+		updateSun((suntimePast / totalMinutes) * 100);
+		document.querySelector('.js-sun').dataset.time =
+			_parseMillisecondsIntoReadableTime(Date.now() / 1000);
+	}, 6000);
 };
 
 // 3 Met de data van de API kunnen we de app opvullen
@@ -88,18 +87,15 @@ let showResult = (queryResponse) => {
 		queryResponse.city.sunset - Date.now() / 1000
 	);
 
-	document.querySelector('.js-time-left').innerHTML = Timeleft;
+	document.querySelector('.js-time-left').innerHTML = Timeleft + ' hours';
 	console.log(_parseMillisecondsIntoReadableTime(Date.now() / 1000));
-
-	document.querySelector('.js-sun').dataset.time =
-		_parseMillisecondsIntoReadableTime(Date.now());
 };
 
 // 2 Aan de hand van een longitude en latitude gaan we de yahoo wheater API ophalen.
 let getAPI = (lat, lon) => {
 	// Eerst bouwen we onze url op
 
-	const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=b6671f84efe078115951eda3dc2f4b7a`;
+	const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&`;
 	// Met de fetch API proberen we de data op te halen.
 	// Als dat gelukt is, gaan we naar onze showResult functie.
 
