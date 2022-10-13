@@ -274,10 +274,19 @@ input::placeholder {
 
 .c-logo {
 	display: flex;
+	position: absolute;
+	top: 10px;
 	font-size: 16px;
 	color: var(--global-text-color);
 }
 .c-logo--icon {
+	height: 22px;
+	width: 22px;
+	align-self: center;
+	padding-right: 8px;
+}
+.c-logo--icon__path {
+	fill: var(--global-text-color);
 }
 
 /*
@@ -330,6 +339,55 @@ input::placeholder {
     ---
     Horizon with sun visualisation
 */
+
+.c-horizon__line {
+	border-top: 1px solid var(--global-text-color);
+
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+}
+
+.c-horizon__time {
+	padding-top: 8px;
+	padding-bottom: 34px;
+	font-size: 12px;
+	color: var(--global-text-color);
+}
+
+.c-horizon__sky-wrapper {
+	position: relative;
+	height: 200px;
+	overflow: hidden;
+	padding-top: 22px;
+	padding-right: 40px;
+}
+
+.c-horizon__sky {
+	position: relative;
+	height: 100%;
+}
+
+.c-horizon__sun {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 40px;
+	transform: translateY(22px);
+}
+.c-horizon__sun::before {
+	content: attr(data-time);
+	display: block;
+	margin-bottom: 8px;
+	font-size: 12px;
+	color: var(--global-text-color);
+}
+.c-horizon__sun__icon {
+	height: 22px;
+	width: 22px;
+}
 
 /*------------------------------------*\
 #UTILITIES
