@@ -48,6 +48,7 @@ let placeSunAndStartMoving = (totalMinutes, sunrise) => {
 	//updatesun every minute
 	setInterval(() => {
 		const minutesSunUp = Date.now() - sunrise * 1000;
+
 		const suntimePast = minutesSunUp / 60 / totalMinutes;
 		updateSun((suntimePast / totalMinutes) * 100);
 		document.querySelector('.js-sun').dataset.time =
@@ -89,13 +90,25 @@ let showResult = (queryResponse) => {
 
 	document.querySelector('.js-time-left').innerHTML = Timeleft + ' hours';
 	console.log(_parseMillisecondsIntoReadableTime(Date.now() / 1000));
+
+	//if time is past sunset add class to body
+	if (
+		queryResponse.city.sunset < Date.now() / 1000 ||
+		queryResponse.city.sunrise > Date.now() / 1000
+	) {
+		document.querySelector('html').classList.add('is-night');
+		document.querySelector('html').classList.remove('is-day');
+	} else {
+		document.querySelector('html').classList.add('is-day');
+		document.querySelector('html').classList.remove('is-night');
+	}
 };
 
 // 2 Aan de hand van een longitude en latitude gaan we de yahoo wheater API ophalen.
 let getAPI = (lat, lon) => {
 	// Eerst bouwen we onze url op
 
-	const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&`;
+	const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=b6671f84efe078115951eda3dc2f4b7a`;
 	// Met de fetch API proberen we de data op te halen.
 	// Als dat gelukt is, gaan we naar onze showResult functie.
 
