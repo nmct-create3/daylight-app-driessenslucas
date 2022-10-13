@@ -91,17 +91,19 @@ let showResult = (queryResponse) => {
 	document.querySelector('.js-time-left').innerHTML = Timeleft + ' hours';
 	console.log(_parseMillisecondsIntoReadableTime(Date.now() / 1000));
 
-	//if time is past sunset add class to body
-	if (
-		queryResponse.city.sunset < Date.now() / 1000 ||
-		queryResponse.city.sunrise > Date.now() / 1000
-	) {
-		document.querySelector('html').classList.add('is-night');
-		document.querySelector('html').classList.remove('is-day');
-	} else {
-		document.querySelector('html').classList.add('is-day');
-		document.querySelector('html').classList.remove('is-night');
-	}
+	//every minute update time left
+	setInterval(() => {
+		if (
+			queryResponse.city.sunset < Date.now() / 1000 ||
+			queryResponse.city.sunrise > Date.now() / 1000
+		) {
+			document.querySelector('html').classList.add('is-night');
+			document.querySelector('html').classList.remove('is-day');
+		} else {
+			document.querySelector('html').classList.add('is-day');
+			document.querySelector('html').classList.remove('is-night');
+		}
+	}, 6000);
 };
 
 // 2 Aan de hand van een longitude en latitude gaan we de yahoo wheater API ophalen.
